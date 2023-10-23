@@ -18,6 +18,7 @@ int main(void)
 	int					fd;
 	int					val = 1;
 	struct sockaddr_in	socketConf = {};
+	int					conn_fd;
 
 	// get the socket fd
 	// AF_INET é de internet protocol
@@ -38,6 +39,16 @@ int main(void)
 	// escutar nesse socket nas confs settadas
 	if (listen(fd, SOMAXCONN))
 			return (throwErrorInC(EPROTO, "listen() failed"));
+	while (42)
+	{
+		struct sockaddr_in client_addr = { };
+		socklen_t socklen = sizeof(client_addr);
+		conn_fd = accept(fd, (struct sockaddr *)&client_addr, &socklen);
+		if (conn_fd < 0)
+			continue ;
+		printf("conectou no fd %d\n", conn_fd);
+		close(conn_fd);
+	}
 
 	return (0);
 }
