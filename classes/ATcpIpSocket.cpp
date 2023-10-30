@@ -23,7 +23,7 @@ void	ATcpIpSocket::initSocket(void)
 	struct sockaddr_in	socketConf = {};
 	int					val = 1;
 
-	this->_sockFd = socket(this->_ipProtocol, SOCK_STREAM, 0);
+	this->_sockFd = socket(this->_ipProtocol, SOCK_STREAM | SOCK_NONBLOCK, 0);
 	if (this->_sockFd < 0)
 		throw new SocketFailedExcpetion("Failed to get socket\n");
 
