@@ -19,7 +19,7 @@ int	getKey(t_keyOption *keyOptions, size_t optionsCount, bool isInputBlocking)
 		return (-1);
 	// set new terminal confs
 	newTerm = oldTerm;
-	newTerm.c_lflag &= ~(ECHO | ICANON);
+	newTerm.c_lflag ^= (ECHO | ICANON);
 	if (tcsetattr(STDIN_FILENO, TCSANOW, &newTerm) != 0)
 		return (-1);
 	// initialize readBuff, read key, compare and do again if flag is on
