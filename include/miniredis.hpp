@@ -16,6 +16,6 @@ typedef struct s_keyOption
 	int		code;
 }	t_keyOption;
 
-int	getKey(t_keyOption *keyOptions, size_t optionsCount, bool isInputBlocking = 0);
+int	getKey(t_keyOption *keyOptions, size_t optionsCount, bool isInputBlocking = false);
 
 #endif

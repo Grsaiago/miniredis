@@ -1,6 +1,11 @@
 #include "../include/miniredis.hpp"
 #include <iostream>
 
+// docs: Looks for the keys in KeyOptions up to optionsCount positions.
+// if isInputBlocking is set to true, then the input will be requested until a
+// key contained in KeyOptions is found.
+// There's no need to confirm input with 'enter' as the function sets terminal to
+// noncannonical mode.
 int	getKey(t_keyOption *keyOptions, size_t optionsCount, bool isInputBlocking)
 {
 	struct termios	oldTerm, newTerm;
