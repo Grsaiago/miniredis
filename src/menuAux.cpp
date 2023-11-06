@@ -29,11 +29,11 @@ int	getKey(t_keyOption *keyOptions, size_t optionsCount, bool isInputBlocking)
 		for (int i = 0; i < optionsCount; i++) {
 			if (strncmp(readBuff, keyOptions[i].value, sizeof(readBuff)) == 0) {
 				ret = keyOptions[i].code;
-				goto breakLoop;
+				goto _BREAKLOOP;
 			}
 		}
 	} while (isInputBlocking);
-	breakLoop:
+	_BREAKLOOP:
 	// reset terminal confs
 	if (tcsetattr(STDIN_FILENO, TCSANOW, &oldTerm) != 0)
 		return (-1);
