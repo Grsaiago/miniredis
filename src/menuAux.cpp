@@ -12,7 +12,7 @@ int	getKey(t_keyOption *keyOptions, size_t optionsCount, bool isInputBlocking)
 {
 	struct termios	oldTerm, newTerm;
 	char			readBuff[4];
-	int				ret = -1;
+	int				ret = 0;
 
 	// get current terminal confs
 	if (tcgetattr(STDIN_FILENO, &oldTerm) != 0)
