@@ -1,10 +1,11 @@
 #include "../include/miniredis.hpp"
+#include <iostream>
 
 int	getKey(t_keyOption *keyOptions, size_t optionsCount, bool isInputBlocking)
 {
 	struct termios	oldTerm, newTerm;
 	char			readBuff[4];
-	int				ret = 0;
+	int				ret = -1;
 
 	// get current terminal confs
 	if (tcgetattr(STDIN_FILENO, &oldTerm) != 0)
@@ -32,7 +33,6 @@ int	getKey(t_keyOption *keyOptions, size_t optionsCount, bool isInputBlocking)
 	return (ret);
 }
 
-/*
 int	main(void)
 {
 	int				key;
@@ -41,11 +41,10 @@ int	main(void)
 		{ .value = UP, .code = 1 }
 	};
 
-	printf("Digite um caracter:\n");
+	std::cout << "Digite um caracter:" << std::endl;
 	do {
 		key = getKey(keyOptions, sizeof(keyOptions) / sizeof(t_keyOption), 1);
 		std::cout << "The key pressed was [" << key << "]" << std::endl;
 		std::cout << CURSORBACK;
 	} while (42);
 }
-*/
