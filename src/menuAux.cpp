@@ -6,7 +6,7 @@
 // key contained in KeyOptions is found.
 // There's no need to confirm input with 'enter' as the function sets terminal to
 // noncannonical mode.
-// return: keyOptions.code in case of keymap found, or -1 if isInputBlocking is
+// return: keyOptions.code in case of keymap found, or 0 if isInputBlocking is
 // set to false and the key is not found
 int	getKey(t_keyOption *keyOptions, size_t optionsCount, bool isInputBlocking)
 {
