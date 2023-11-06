@@ -1,41 +1,4 @@
-#include <iostream>
-#include <unistd.h>
-#include <string.h>
-#include <strings.h>
-#include <cstdio>
-#include <termios.h>
-#include <fcntl.h>
-
-typedef struct s_keyOption
-{
-	char	value[4];
-	int		code;
-}	t_keyOption;
-
-int	getKey(t_keyOption *keyOptions, size_t optionsCount, bool isInputBlocking = 0);
-
-#define UP "\e[A"
-#define DOWN "\e[B"
-#define RIGHT "\e[C"
-#define LEFT "\e[D"
-#define ENTER "\n\0\0\0"
-#define CURSORBACK "\e[1A"
-
-int	main(void)
-{
-	int				key;
-	int				opt = 0;
-	t_keyOption		keyOptions[] = {
-		{ .value = UP, .code = 1 }
-	};
-
-	printf("Digite um caracter:\n");
-	do {
-		key = getKey(keyOptions, sizeof(keyOptions) / sizeof(t_keyOption), 1);
-		std::cout << "The key pressed was [" << key << "]" << std::endl;
-		std::cout << CURSORBACK;
-	} while (42);
-}
+#include "../include/miniredis.hpp"
 
 int	getKey(t_keyOption *keyOptions, size_t optionsCount, bool isInputBlocking)
 {
@@ -68,3 +31,21 @@ int	getKey(t_keyOption *keyOptions, size_t optionsCount, bool isInputBlocking)
 		return (-1);
 	return (ret);
 }
+
+/*
+int	main(void)
+{
+	int				key;
+	int				opt = 0;
+	t_keyOption		keyOptions[] = {
+		{ .value = UP, .code = 1 }
+	};
+
+	printf("Digite um caracter:\n");
+	do {
+		key = getKey(keyOptions, sizeof(keyOptions) / sizeof(t_keyOption), 1);
+		std::cout << "The key pressed was [" << key << "]" << std::endl;
+		std::cout << CURSORBACK;
+	} while (42);
+}
+*/
