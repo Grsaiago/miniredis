@@ -25,16 +25,16 @@ void	ATcpIpSocket::initSocket(void)
 
 	this->_sockFd = socket(this->_ipProtocol, SOCK_STREAM | SOCK_NONBLOCK, 0);
 	if (this->_sockFd < 0)
-		throw new SocketFailedExcpetion("Failed to get socket\n");
+		throw new SocketFailedException("Failed to get socket\n");
 
 	if (setsockopt(this->_sockFd, SOL_SOCKET, SO_REUSEADDR, &val, sizeof(val)) != 0)
-		throw new SocketFailedExcpetion("Failed to setup socket\n");
+		throw new SocketFailedException("Failed to setup socket\n");
 
 	socketConf.sin_family = this->_ipProtocol;
 	socketConf.sin_port = ntohs(this->_port);
 	socketConf.sin_addr.s_addr = ntohl(this->_ipAddress);
 	if (bind(this->_sockFd, (const sockaddr *)&socketConf, sizeof(socketConf)))
-		throw new SocketFailedExcpetion("Failed to bind socket\n");
+		throw new SocketFailedException("Failed to bind socket\n");
 	return ;
 }
 
@@ -45,7 +45,7 @@ void	ATcpIpSocket::initSocket(void)
 int	ATcpIpSocket::listenSocket(int maxConnections)
 {
 	if (this->_sockFd < 0 || listen(this->_sockFd, maxConnections) != 0)
-		throw new SocketFailedExcpetion("Failed to listen on socket\n");
+		throw new SocketFailedException("Failed to listen on socket\n");
 	return (0);
 }
 
@@ -142,5 +142,5 @@ bool	ATcpIpSocket::isSocketFd(int fd)
 
 /* exceptions */
 
-ATcpIpSocket::SocketFailedExcpetion::SocketFailedExcpetion(std::string message)
+ATcpIpSocket::SocketFailedException::SocketFailedException(std::string message)
 	: std::runtime_error(message) { } 

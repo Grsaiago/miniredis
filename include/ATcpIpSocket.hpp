@@ -49,9 +49,9 @@ class ATcpIpSocket
 		in_addr_t		_ipAddress;
 
 		/* exceptions */
-		class SocketFailedExcpetion : public std::runtime_error {
+		class SocketFailedException : public std::runtime_error {
 			public:
-				SocketFailedExcpetion(std::string message);
+				SocketFailedException(std::string message);
 		};
 };
 
