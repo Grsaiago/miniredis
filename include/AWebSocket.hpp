@@ -1,7 +1,6 @@
-#ifndef ATCPIPSOCKET_H
-# define ATCPIPSOCKET_H
+#ifndef AWEBSOCKET_HPP
+# define AWEBSOCKET_HPP
 # include <unistd.h>
-# include <cstdio>
 # include <sys/stat.h>
 # include <sys/socket.h>
 # include <netinet/in.h>
@@ -12,24 +11,17 @@
 # define MAXTCPPORTSTRSIZE 7
 #endif
 
-/*
- * IPV4 | IPV6
- */
 typedef enum IpSockProtocols
 {
 	IPV4 = AF_INET,
 	IPV6 = AF_INET6
 }	IpSockProtocols;
 
-class ATcpIpSocket
+class AWebSocket
 {
 	public:
-		ATcpIpSocket(IpSockProtocols ipProtocol, unsigned long port, char *ipAddress);
-		~ATcpIpSocket(void);
-		void			initSocket(void);
-		int				listenSocket(int maxConnections = SOMAXCONN);
-		int				acceptOnSocket(void);
-		void			connectSocket(void);
+		AWebSocket(IpSockProtocols ipProtocol, unsigned long port, char *ipAddress);
+		~AWebSocket(void);
 		void			closeSocket(void);
 		std::string		getProtocolAsStr(void) const;
 		std::string		getPortAsStr(void) const;
@@ -37,22 +29,17 @@ class ATcpIpSocket
 		unsigned int	getProtocolAsUInt(void) const;
 		unsigned int	getPortAsUInt(void) const;
 		unsigned int	getIpAsUInt(void) const;
+		virtual std::string		getSocketType(void) const = 0;
 
 		/* static functions */
 		static bool isSocketFd(int fd);
 
-	private:
+	protected:
 		/* internal socket fd */
 		int				_sockFd;
 		IpSockProtocols	_ipProtocol;
 		int				_port;
 		in_addr_t		_ipAddress;
-
-		/* exceptions */
-		class SocketFailedException : public std::runtime_error {
-			public:
-				SocketFailedException(std::string message);
-		};
 };
 
 #endif

@@ -11,7 +11,7 @@
 int	getKey(t_keyOption *keyOptions, size_t optionsCount, bool isInputBlocking)
 {
 	struct termios	oldTerm, newTerm;
-	char			readBuff[4];
+	register char			readBuff[4];
 	int				ret = 0;
 
 	// get current terminal confs
@@ -40,6 +40,7 @@ int	getKey(t_keyOption *keyOptions, size_t optionsCount, bool isInputBlocking)
 	return (ret);
 }
 
+/*
 int	main(void)
 {
 	int				key;
@@ -55,3 +56,4 @@ int	main(void)
 		std::cout << CURSORBACK;
 	} while (42);
 }
+*/
