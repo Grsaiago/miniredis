@@ -7,6 +7,8 @@ AWebSocket::AWebSocket(IpSockProtocols ipProtocol, unsigned long port, char *ipA
 	_ipAddress(inet_addr(ipAddress))
 { };
 
+AWebSocket::AWebSocket(void) { };
+
 /* docs: close() internal socket and return */
 AWebSocket::~AWebSocket(void)
 {

@@ -11,7 +11,7 @@
 int	getKey(t_keyOption *keyOptions, size_t optionsCount, bool isInputBlocking)
 {
 	struct termios	oldTerm, newTerm;
-	register char			readBuff[4];
+	char			readBuff[4];
 	int				ret = 0;
 
 	// get current terminal confs
@@ -26,7 +26,7 @@ int	getKey(t_keyOption *keyOptions, size_t optionsCount, bool isInputBlocking)
 	do {
 		memset(readBuff, 0, sizeof(readBuff));
 		read(STDIN_FILENO, readBuff, sizeof(readBuff));
-		for (int i = 0; i < optionsCount; i++) {
+		for (size_t i = 0; i < optionsCount; i++) {
 			if (strncmp(readBuff, keyOptions[i].value, sizeof(readBuff)) == 0) {
 				ret = keyOptions[i].code;
 				goto _BREAKLOOP;

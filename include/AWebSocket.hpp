@@ -22,19 +22,20 @@ class AWebSocket
 	public:
 		AWebSocket(IpSockProtocols ipProtocol, unsigned long port, char *ipAddress);
 		~AWebSocket(void);
-		void			closeSocket(void);
-		std::string		getProtocolAsStr(void) const;
-		std::string		getPortAsStr(void) const;
-		std::string		getIpAsStr(void) const;
-		unsigned int	getProtocolAsUInt(void) const;
-		unsigned int	getPortAsUInt(void) const;
-		unsigned int	getIpAsUInt(void) const;
+		void					closeSocket(void);
+		std::string				getProtocolAsStr(void) const;
+		std::string				getPortAsStr(void) const;
+		std::string				getIpAsStr(void) const;
+		unsigned int			getProtocolAsUInt(void) const;
+		unsigned int			getPortAsUInt(void) const;
+		unsigned int			getIpAsUInt(void) const;
 		virtual std::string		getSocketType(void) const = 0;
 
 		/* static functions */
 		static bool isSocketFd(int fd);
 
 	protected:
+		AWebSocket(void);
 		/* internal socket fd */
 		int				_sockFd;
 		IpSockProtocols	_ipProtocol;
