@@ -10,11 +10,6 @@ ConnectionSocket::ConnectionSocket(int fd) : AWebSocket::AWebSocket()
 	struct sockaddr_in	socketInfo;
 	socklen_t			socketInfoSize = sizeof(struct sockaddr_in);
 
-	if (AWebSocket::isSocketFd(fd) != true) {
-		// trocar por uma exception
-		perror("Error, deu merda no fd");
-		return ;
-	}
 	(void)getpeername(fd, (struct sockaddr *)&socketInfo, &socketInfoSize);
 	this->_ipProtocol = IPV4;
 	this->_sockFd = fd;
@@ -46,7 +41,7 @@ std::string	ConnectionSocket::getSocketType(void) const
 	return (std::string("connection socket"));
 }
 
-std::ostream	&operator<<(std::ostream &os, ConnectionSocket  const &rhs)
+std::ostream	&operator<<(std::ostream &os, ConnectionSocket const &rhs)
 {
 	std::string	line;
 

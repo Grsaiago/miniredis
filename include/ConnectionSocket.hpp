@@ -16,6 +16,6 @@ class ConnectionSocket : public AWebSocket
 		char	*_staticBuff;
 };
 
-std::ostream	&operator<<(std::ostream &os, ConnectionSocket  const &rhs);
+std::ostream	&operator<<(std::ostream &os, ConnectionSocket const &rhs);
 
 #endif
