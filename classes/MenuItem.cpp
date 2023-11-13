@@ -22,7 +22,12 @@ void	MenuItem::draw(bool isSelected) const
 	std::string	line;
 
 	if (isSelected)
+	{
 		line.append(SELECTEDCOLOR);
+		line.append(">   ");
+	}
+	else
+		line.append("    ");
 	line.append(this->_name);
 	if (isSelected)
 		line.append(COLORTERMINATOR);

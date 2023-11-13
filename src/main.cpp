@@ -8,6 +8,9 @@ int main(int argc, char **argv) {
     std::cout << "Usage: ./myredis <server port>" << std::endl;
     return (EXIT_FAILURE);
   }
+  if (std::string(argv[1]).compare("--menu") == 0) {
+	  std::cout << "entrou no menu" << std::endl;
+  }
   ServerSocket serverSocket(IPV4, std::atoi(argv[1]));
   std::vector<ConnectionSocket> connPool;
   int incomingConnectionFd;

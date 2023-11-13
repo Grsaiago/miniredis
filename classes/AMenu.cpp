@@ -18,7 +18,7 @@ AMenu::AMenu(std::vector<std::string> const &options)
 
 void	AMenu::drawMenu() const
 {
-	for (int i = 0; i < this->_options.size(); i++)
+	for (long unsigned int i = 0; i < this->_options.size(); i++)
 	{
 		this->_options[i].draw(i == this->_cursorPosition);
 		std::cout << '\n';
