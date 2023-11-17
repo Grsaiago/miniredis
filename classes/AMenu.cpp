@@ -5,10 +5,11 @@ AMenu::AMenu(std::vector<MenuItem> const &options) :
 	_cursorPosition(0)
 { }
 
-AMenu::AMenu(std::vector<std::string> const &options)
+AMenu::AMenu(std::vector<std::string> const &options) :
+	_cursorPosition(0)
 {
 	for (auto pos = options.begin(); pos != options.end(); pos++)
-		this->_options.push_back(MenuItem(*pos));
+		this->_options.emplace_back(*pos);
 	return ;
 }
 

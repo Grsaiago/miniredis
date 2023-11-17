@@ -9,7 +9,7 @@
 
 int	main(void)
 {
-	MenuStack	menuStack(std::vector<std::string>(1));
+	MenuStack	menuStack(std::vector<std::string>(0));
 
 	menuStack.menuLoop();
 	return (0);

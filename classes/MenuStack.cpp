@@ -10,8 +10,8 @@ MenuStack::~MenuStack(void) { }
 
 AMenu	*MenuStack::menuLoop(void)
 {
-	MainMenu	*mainMenu;
-	AMenu		*nextMenu;
+	MainMenu					*mainMenu;
+	AMenu						*nextMenu;
 
 	mainMenu = new MainMenu(std::vector<std::string>(0));
 	mainMenu->addOption("Op1");
