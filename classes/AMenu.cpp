@@ -1,8 +1,4 @@
 #include "../include/AMenu.hpp"
-#include <cstddef>
-#include <numeric>
-#include <vector>
-
 
 AMenu::AMenu(std::vector<MenuItem> const &options) :
 	_options(std::vector<MenuItem>(options)),
@@ -16,9 +12,11 @@ AMenu::AMenu(std::vector<std::string> const &options)
 	return ;
 }
 
+AMenu::~AMenu(void) { }
+
 void	AMenu::drawMenu() const
 {
-	for (long unsigned int i = 0; i < this->_options.size(); i++)
+	for (unsigned long int i = 0; i < this->_options.size(); i++)
 	{
 		this->_options[i].draw(i == this->_cursorPosition);
 		std::cout << '\n';
@@ -42,30 +40,57 @@ void	AMenu::addOption(const MenuItem &newOption)
 
 void	AMenu::addOption(std::string newOption)
 {
-	this->_options.push_back(MenuItem(newOption));
+	this->_options.emplace_back(newOption);
 	return ;
 }
 
-int8_t	AMenu::getCursorPosition(void) const
+int	AMenu::getCursorPosition(void) const
 {
 	return (this->_cursorPosition);
 }
 
-int8_t	AMenu::captureInput(int8_t isBlocking) const
+int	AMenu::captureInput(bool isBlocking) const
 {
+	struct termios	oldTerm, newTerm;
+	char			readBuff[4];
+	int				ret = 0;
 
+	if (tcgetattr(STDIN_FILENO, &oldTerm) != 0)
+		return (-1);
+	newTerm = oldTerm;
+	newTerm.c_lflag ^= (ECHO | ICANON);
+	if (tcsetattr(STDIN_FILENO, TCSANOW, &newTerm) != 0)
+		return (-1);
+	do {
+		memset(readBuff, 0, sizeof(readBuff));
+		read(STDIN_FILENO, readBuff, sizeof(readBuff));
+		if (strncmp(readBuff, UP, 4)) {
+			ret = UPCODE;
+			goto _BREAKLOOP;
+		} else if (strncmp(readBuff, DOWN, 4)) {
+			ret = DOWNCODE;
+			goto _BREAKLOOP;
+		} else if (strncmp(readBuff, ENTER, 4)) {
+			ret = ENTERCODE;
+			goto _BREAKLOOP;
+		}
+	} while (isBlocking);
+	_BREAKLOOP:
+	if (tcsetattr(STDIN_FILENO, TCSANOW, &oldTerm) != 0)
+		return (-1);
+	return (ret);
 }
 
-void	AMenu::moveCursor(int8_t ammount)
+void	AMenu::moveCursor(int ammount)
 {
-	int8_t	newPosition;
+	int	newPosition;
 
 	newPosition = this->_cursorPosition + ammount;
 	if (newPosition < 0)
 		this->_cursorPosition = 0;
-	else if (newPosition >= (int8_t)this->_options.size())
+	else if (newPosition >= (int)this->_options.size())
 		this->_cursorPosition = this->_options.size() - 1;
 	else
-		this->_cursorPosition = ammount;
+		this->_cursorPosition = newPosition;
 	return ;
 }

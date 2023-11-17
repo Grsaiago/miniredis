@@ -2,11 +2,11 @@
 # define MENUITEM_HPP
 
 # ifndef COLORTERMINATOR
-#  define COLORTERMINATOR "end"
+#  define COLORTERMINATOR "\e[0m"
 # endif
 
 # ifndef SELECTEDCOLOR
-#  define SELECTEDCOLOR "red"
+#  define SELECTEDCOLOR "\e[1;32m"
 # endif
 
 # include <string>

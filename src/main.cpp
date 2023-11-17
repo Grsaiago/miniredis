@@ -1,8 +1,20 @@
 #include "../include/ConnectionSocket.hpp"
 #include "../include/ServerSocket.hpp"
+#include "../include/MenuItem.hpp"
+#include "../include/AMenu.hpp"
+#include "../include/MenuStack.hpp"
+#include "../include/MainMenu.hpp"
 #include <cstdlib>
 #include <vector>
 
+int	main(void)
+{
+	MenuStack	menuStack(std::vector<std::string>(1));
+
+	menuStack.menuLoop();
+	return (0);
+}
+/*
 int main(int argc, char **argv) {
   if (argc != 2) {
     std::cout << "Usage: ./myredis <server port>" << std::endl;
@@ -28,3 +40,4 @@ int main(int argc, char **argv) {
   serverSocket.closeSocket();
   return (EXIT_SUCCESS);
 }
+*/
