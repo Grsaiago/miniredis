@@ -8,6 +8,8 @@ class MainMenu : public AMenu
 	public:
 		MainMenu(std::vector<MenuItem> const &options);
 		MainMenu(std::vector<std::string> const &options);
+		MainMenu(std::initializer_list<std::string> const options);
+		MainMenu(std::initializer_list<MenuItem> const options);
 		virtual 		~MainMenu(void);
 		virtual AMenu	*menuLoop(void);
 };

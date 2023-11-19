@@ -3,6 +3,7 @@
 
 # include "./MenuItem.hpp"
 # include <cstddef>
+#include <initializer_list>
 # include <iterator>
 # include <numeric>
 # include <vector>
@@ -16,6 +17,7 @@
 # define RIGHT "\e[C"
 # define LEFT "\e[D"
 # define ENTER "\n\0\0"
+# define CLEAR "\e[H\e[J"
 # define CURSORBACK "\e[#A"
 # define UPCODE 1
 # define DOWNCODE 2
@@ -26,8 +28,11 @@ class AMenu
 	public:
 		AMenu(std::vector<MenuItem> const &options);
 		AMenu(std::vector<std::string> const &options);
+		AMenu(std::initializer_list<std::string> const options);
+		AMenu(std::initializer_list<MenuItem> const options);
 		virtual						~AMenu(void);
 		void						drawMenu(void) const;
+		void						clearTerminal(void) const;
 		virtual AMenu				*menuLoop(void) = 0;
 
 		/* getter/setter */

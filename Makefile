@@ -4,6 +4,7 @@ CC = g++
 
 CFLAGS = -Wall -Wextra -g
 
+
 SRCS =	$(wildcard ./src/*.cpp) \
 		$(wildcard ./classes/*.cpp) \
 

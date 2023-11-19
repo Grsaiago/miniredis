@@ -8,10 +8,29 @@ AMenu::AMenu(std::vector<MenuItem> const &options) :
 AMenu::AMenu(std::vector<std::string> const &options) :
 	_cursorPosition(0)
 {
-	for (auto pos = options.begin(); pos != options.end(); pos++)
-		this->_options.emplace_back(*pos);
+	for (auto pos : options) {
+		this->_options.emplace_back(pos);
+	}
 	return ;
 }
+AMenu::AMenu(std::initializer_list<std::string> const options) :
+	_cursorPosition(0)
+{
+	for (auto pos: options) {
+		this->_options.emplace_back(pos);
+	}
+	return ;
+}
+
+AMenu::AMenu(std::initializer_list<MenuItem> const options) :
+	_cursorPosition(0)
+{
+	for (auto pos : options) {
+		this->_options.push_back(pos);
+	}
+	return ;
+}
+
 
 AMenu::~AMenu(void) { }
 
