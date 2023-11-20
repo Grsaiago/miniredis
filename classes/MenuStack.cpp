@@ -2,23 +2,25 @@
 #include "../include/MainMenu.hpp"
 #include <vector>
 
-MenuStack::MenuStack(std::vector<MenuItem> const &options) : AMenu(options) { }
-
-MenuStack::MenuStack(std::vector<std::string> const &options) : AMenu(options) { }
-
-MenuStack::MenuStack(std::initializer_list<std::string> const options) : AMenu(options) { }
-
-MenuStack::MenuStack(std::initializer_list<MenuItem> const options) : AMenu(options) { } 
+MenuStack *MenuStack::instance = nullptr;
 
 MenuStack::~MenuStack(void) { }
 
-AMenu	*MenuStack::menuLoop(void)
+MenuStack::MenuStack(std::initializer_list<AMenu *> const options)
 {
-	MainMenu					*mainMenu;
+	for (auto elem : options) {
+		if (elem)
+			this->menuStack.push(elem);
+	}
+	return ;
+}
+
+MenuStack	*MenuStack::menuStackLoop(void)
+{
 	AMenu						*nextMenu;
 
-	mainMenu = new MainMenu({"op1", "op2", "op3"});
-	this->menuStack.push(mainMenu);
+	// mainMenu = new MainMenu({"op1", "op2", "op3"});
+	// this->menuStack.push(mainMenu);
 	// criar o MainMenu com a factory e dar push nele pra stack.
 	do {
 		nextMenu = this->menuStack.top()->menuLoop();
@@ -29,4 +31,15 @@ AMenu	*MenuStack::menuLoop(void)
 	} while (this->menuStack.empty() == false);
 	std::cout << "terminou" << std::endl;
 	return (this);
+}
+
+void	*MenuStack::operator new(size_t size)
+{
+	MenuStack	*ptr;
+
+	if (MenuStack::instance)
+		return MenuStack::instance;
+	ptr = (MenuStack *) ::operator new(size);
+	MenuStack::instance = ptr;
+	return (ptr);
 }

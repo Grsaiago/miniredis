@@ -4,16 +4,19 @@
 # include <stack>
 # include "./AMenu.hpp"
 
-class MenuStack : public AMenu
+class MenuStack
 {
 	public:
-		MenuStack(std::vector<MenuItem> const &options);
-		MenuStack(std::vector<std::string> const &options);
-		MenuStack(std::initializer_list<std::string> const options);
-		MenuStack(std::initializer_list<MenuItem> const options);
-		virtual				~MenuStack(void);
+		MenuStack(std::initializer_list<AMenu *> const options);
+		~MenuStack(void);
 		std::stack<AMenu *>	menuStack;
-		virtual AMenu		*menuLoop(void);
-};
+		MenuStack			*menuStackLoop(void);
 
+		/* overloads */
+		void		*operator new(size_t size);
+
+		/* static instance */
+		static MenuStack	*instance;
+};
+ 
 #endif

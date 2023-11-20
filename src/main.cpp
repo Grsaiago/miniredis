@@ -7,11 +7,14 @@
 #include <cstdlib>
 #include <vector>
 
+
 int	main(void)
 {
-	MenuStack	menuStack(std::vector<std::string>(0));
+	MenuStack *menuStack = new MenuStack({NULL});
+	MenuStack *ptr = NULL;
 
-	menuStack.menuLoop();
+	ptr = new MenuStack({NULL});
+	menuStack->menuStackLoop();
 	return (0);
 }
 /*
