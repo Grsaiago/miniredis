@@ -84,18 +84,17 @@ int	AMenu::captureInput(bool isBlocking) const
 	do {
 		memset(readBuff, 0, sizeof(readBuff));
 		read(STDIN_FILENO, readBuff, sizeof(readBuff));
-		if (strncmp(readBuff, UP, 4)) {
+		if (strncmp(readBuff, UP, sizeof(readBuff)) == 0) {
 			ret = UPCODE;
-			goto _BREAKLOOP;
-		} else if (strncmp(readBuff, DOWN, 4)) {
+			break ;
+		} else if (strncmp(readBuff, DOWN, sizeof(readBuff)) == 0) {
 			ret = DOWNCODE;
-			goto _BREAKLOOP;
-		} else if (strncmp(readBuff, ENTER, 4)) {
+			break ;
+		} else if (strncmp(readBuff, ENTER, sizeof(readBuff)) == 0) {
 			ret = ENTERCODE;
-			goto _BREAKLOOP;
+			break ;
 		}
 	} while (isBlocking);
-	_BREAKLOOP:
 	if (tcsetattr(STDIN_FILENO, TCSANOW, &oldTerm) != 0)
 		return (-1);
 	return (ret);

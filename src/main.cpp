@@ -1,19 +1,16 @@
-#include "../include/ConnectionSocket.hpp"
-#include "../include/ServerSocket.hpp"
-#include "../include/MenuItem.hpp"
-#include "../include/AMenu.hpp"
-#include "../include/MenuStack.hpp"
-#include "../include/MainMenu.hpp"
-#include <cstdlib>
-#include <vector>
+#include "ConnectionSocket.hpp"
+#include "ServerSocket.hpp"
+#include "MenuItem.hpp"
+#include "AMenu.hpp"
+#include "MenuStack.hpp"
+#include "UtilsMenu.hpp"
+#include "MainMenu.hpp"
 
 
 int	main(void)
 {
-	MenuStack *menuStack = new MenuStack({NULL});
-	MenuStack *ptr = NULL;
+	MenuStack *menuStack = new MenuStack({new MainMenu()});
 
-	ptr = new MenuStack({NULL});
 	menuStack->menuStackLoop();
 	return (0);
 }

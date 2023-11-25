@@ -3,7 +3,7 @@
 
 # include "./MenuItem.hpp"
 # include <cstddef>
-#include <initializer_list>
+# include <initializer_list>
 # include <iterator>
 # include <numeric>
 # include <vector>
@@ -12,13 +12,12 @@
 # include <termios.h>
 # include <string.h>
 
-# define UP "\e[B"
-# define DOWN "\e[A"
+# define UP "\e[A"
+# define DOWN "\e[B"
 # define RIGHT "\e[C"
 # define LEFT "\e[D"
-# define ENTER "\n\0\0"
+# define ENTER "\n\0\0\0"
 # define CLEAR "\e[H\e[J"
-# define CURSORBACK "\e[#A"
 # define UPCODE 1
 # define DOWNCODE 2
 # define ENTERCODE 4

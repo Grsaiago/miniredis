@@ -1,5 +1,7 @@
 #include "../include/MainMenu.hpp"
-#include <initializer_list>
+#include "../include/MenuFactory.hpp"
+
+MainMenu::MainMenu(void) : AMenu({"op1", "Network Utils", "<---"}) { }
 
 MainMenu::MainMenu(std::vector<MenuItem> const &options) : AMenu(options) {}
 
@@ -27,7 +29,16 @@ AMenu *MainMenu::menuLoop(void)
 				this->moveCursor(1);
 				break ;
 			case (ENTERCODE):
-				std::cout << "você clicou Enter" << std::endl;
+				switch (this->getCursorPosition()) {
+					case 0:
+						return (nullptr);
+					case 1:
+						return MenuFactory::createMenu(UTILSMENU);
+						break ;
+					case 2:
+						return (nullptr);
+						break ;
+				}
 				break ;
 		}
 	} while (true);
