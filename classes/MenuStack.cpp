@@ -24,8 +24,10 @@ MenuStack	*MenuStack::menuStackLoop(void)
 	// criar o MainMenu com a factory e dar push nele pra stack.
 	do {
 		nextMenu = this->menuStack.top()->menuLoop();
-		if (!nextMenu)
+		if (!nextMenu) {
+			delete this->menuStack.top();
 			this->menuStack.pop();
+		}
 		else
 			this->menuStack.push(nextMenu);
 	} while (this->menuStack.empty() == false);
